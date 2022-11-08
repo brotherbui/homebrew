@@ -1,5 +1,5 @@
 class Magerun < Formula
-  version "2.3.0"
+  version "latest"
   desc "Magerun"
   homepage "https://magerun.net"
   url "https://files.magerun.net/n98-magerun.phar"
