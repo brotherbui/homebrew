@@ -1,27 +1,34 @@
 class PhpAT74 < Formula
   desc "General-purpose scripting language"
   homepage "https://www.php.net/"
-  # Should only be updated if the new version is announced on the homepage, https://www.php.net/
-  url "https://www.php.net/distributions/php-7.4.33.tar.xz"
-  mirror "https://fossies.org/linux/www/php-7.4.33.tar.xz"
-  sha256 "924846abf93bc613815c55dd3f5809377813ac62a9ec4eb3778675b82a27b927"
+  url "https://github.com/shivammathur/php-src-backports/archive/7328f3a0344806b846bd05657bdce96e47810bf0.tar.gz"
+  version "7.4.33"
+  sha256 "97b817fb1d8ace67512da447496c115e998397084c741e5bef4385f5fab3fb4c"
   license "PHP-3.01"
+  revision 1
 
   bottle do
-    sha256 arm64_ventura:  "1091e8f56900b00831b83fd306b5cf65c81010934291bfc1236c278dcd6196e7"
-    sha256 arm64_monterey: "f2363aa4ff85610faeffa3aa434d4fd5cbea5bd58df96062f3d34a0bf56f7437"
-    sha256 arm64_big_sur:  "8478dfd566c2c55f9baf86a134e71a7a580ca58d7ac330dcc66566643eaf4ab9"
-    sha256 ventura:        "e7ccc1804e74d2920da1d5dff6fb69a22a2245689da90de90bd8d70dc0915aec"
-    sha256 monterey:       "8b5f1a8646a6dd3815f3f8d008828a5b1f654323fc92f22ea6959536b903bacc"
-    sha256 big_sur:        "c5d8a2e65da3ddba5863e4cd42f0cbe71ade99d610a5cd8b0bfa258cb260c8d7"
-    sha256 catalina:       "c3326615d6e675f3cca61ec0bc8eabccfde141aabc3629d655f2369515390ed3"
-    sha256 x86_64_linux:   "4d3165f0fe70d8fba0b2d83ac0050b2e9175b5710e77d9d8ea2bd10ce45fbc95"
+    root_url "https://ghcr.io/v2/shivammathur/php"
+    rebuild 1
+    sha256 arm64_monterey: "5045d96a2920d628a1d832b12b0dd5f84eeb888877f14e326ca0643084384fc1"
+    sha256 arm64_big_sur:  "fd1d9dd6179b42ffb00ab5308e17ae27b0f559649ea400e6712199a7c6b38be0"
+    sha256 monterey:       "05c82edca10336edbac44a86e4e16e4ea5351200afeb760db8ee5ba41a45ad01"
+    sha256 big_sur:        "a76b7183a63c87542c809f2bab171450ecc5562be771f0a3f87fb49826a704e0"
+    sha256 x86_64_linux:   "346120b04e09882fd6191afc7580ecb27704e81fee40927158947f679e9ee501"
   end
 
   keg_only :versioned_formula
 
+  # This PHP version is not supported upstream as of 2022-11-28.
+  # Although, this was built with back-ported security patches,
+  # we recommended to use a currently supported PHP version.
+  # For more details, refer to https://www.php.net/eol.php
+  # deprecate! date: "2022-11-28", because: :versioned_formula
+
+  depends_on "bison" => :build
   depends_on "httpd" => [:build, :test]
   depends_on "pkg-config" => :build
+  depends_on "re2c" => :build
   depends_on "apr"
   depends_on "apr-util"
   depends_on "argon2"
@@ -34,6 +41,7 @@ class PhpAT74 < Formula
   depends_on "gmp"
   depends_on "icu4c"
   depends_on "krb5"
+  depends_on "libffi"
   depends_on "libpq"
   depends_on "libsodium"
   depends_on "libzip"
@@ -101,7 +109,8 @@ class PhpAT74 < Formula
     if OS.mac?
       ENV["SASL_CFLAGS"] = "-I#{MacOS.sdk_path_if_needed}/usr/include/sasl"
       ENV["SASL_LIBS"] = "-lsasl2"
-    else
+    end
+    if OS.linux?
       ENV["SQLITE_CFLAGS"] = "-I#{Formula["sqlite"].opt_include}"
       ENV["SQLITE_LIBS"] = "-lsqlite3"
       ENV["BZIP_DIR"] = Formula["bzip2"].opt_prefix
@@ -109,6 +118,7 @@ class PhpAT74 < Formula
 
     # Each extension that is built on Mojave needs a direct reference to the
     # sdk path or it won't find the headers
+    headers_path = ""
     headers_path = "=#{MacOS.sdk_path_if_needed}/usr" if OS.mac?
 
     args = %W[
@@ -183,7 +193,8 @@ class PhpAT74 < Formula
       args << "--enable-dtrace"
       args << "--with-ldap-sasl"
       args << "--with-os-sdkpath=#{MacOS.sdk_path_if_needed}"
-    else
+    end
+    if OS.linux?
       args << "--disable-dtrace"
       args << "--without-ldap-sasl"
       args << "--without-ndbm"
@@ -198,18 +209,23 @@ class PhpAT74 < Formula
     extension_dir = Utils.safe_popen_read("#{bin}/php-config", "--extension-dir").chomp
     orig_ext_dir = File.basename(extension_dir)
     inreplace bin/"php-config", lib/"php", prefix/"pecl"
-    inreplace "php.ini-development", %r{; ?extension_dir = "\./"},
-      "extension_dir = \"#{HOMEBREW_PREFIX}/lib/php/pecl/#{orig_ext_dir}\""
+    %w[development production].each do |mode|
+      inreplace "php.ini-#{mode}", %r{; ?extension_dir = "\./"},
+        "extension_dir = \"#{HOMEBREW_PREFIX}/lib/php/pecl/#{orig_ext_dir}\""
+    end
 
     # Use OpenSSL cert bundle
     openssl = Formula["openssl@1.1"]
-    inreplace "php.ini-development", /; ?openssl\.cafile=/,
-      "openssl.cafile = \"#{openssl.pkgetc}/cert.pem\""
-    inreplace "php.ini-development", /; ?openssl\.capath=/,
-      "openssl.capath = \"#{openssl.pkgetc}/certs\""
+    %w[development production].each do |mode|
+      inreplace "php.ini-#{mode}", /; ?openssl\.cafile=/,
+        "openssl.cafile = \"#{openssl.pkgetc}/cert.pem\""
+      inreplace "php.ini-#{mode}", /; ?openssl\.capath=/,
+        "openssl.capath = \"#{openssl.pkgetc}/certs\""
+    end
 
     config_files = {
       "php.ini-development"   => "php.ini",
+      "php.ini-production"    => "php.ini-production",
       "sapi/fpm/php-fpm.conf" => "php-fpm.conf",
       "sapi/fpm/www.conf"     => "php-fpm.d/www.conf",
     }
@@ -308,11 +324,13 @@ class PhpAT74 < Formula
     EOS
   end
 
+  plist_options manual: "php-fpm"
   service do
     run [opt_sbin/"php-fpm", "--nodaemonize"]
+    run_type :immediate
     keep_alive true
-    working_dir var
     error_log_path var/"log/php-fpm.log"
+    working_dir var
   end
 
   test do
