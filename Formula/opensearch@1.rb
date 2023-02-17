@@ -79,7 +79,7 @@ class OpensearchAT1 < Formula
     EOS
   end
 
-  service.require_root manual: "opensearch"
+  #plist_options manual: "opensearch"
   service do
     run opt_bin/"opensearch"
     working_dir var
