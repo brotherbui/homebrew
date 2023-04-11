@@ -1,5 +1,5 @@
 cask "singlebox" do
-  version "28.0.1"
+  version "31.8.0"
   sha256 :no_check # required as upstream package is updated in-place
 
   url "https://cdn-2.webcatalog.io/singlebox/Singlebox-#{version}-universal.dmg"
