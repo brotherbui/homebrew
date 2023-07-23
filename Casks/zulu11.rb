@@ -2,9 +2,9 @@ cask "zulu11" do
   arch arm: "aarch64", intel: "x64"
   choice = on_arch_conditional arm: "arm", intel: "x86"
 
-  version "11.0.18,11.62.17-ca"
-  sha256 arm:   "a06e2c6e359ae2141d8bbfd331d811531a2126e3fd23e9cdee88b076f4f36e88",
-         intel: "09a89a76c7d0d17d292df704177a6787f61a83a9379d165c76aad1de6b2ade87"
+  version "11.0.20,11.66.15-ca"
+  sha256 arm:   "8bf03fce77655e6f96e9c6694ddcf9c41301178a82eefe7c7476c92061d297e4",
+         intel: "c9f010d6540e4cb7ca1b227b15a46d1cb309efd707b196d9e7d1d7dd34bbd991"
 
   url "https://cdn.azul.com/zulu/bin/zulu#{version.csv.second}-jdk#{version.csv.first}-macosx_#{arch}.dmg",
       referer: "https://www.azul.com/downloads/zulu/zulu-mac/"
@@ -23,4 +23,6 @@ cask "zulu11" do
   pkg "Double-Click to Install Azul Zulu JDK #{version.major}.pkg"
 
   uninstall pkgutil: "com.azulsystems.zulu.#{version.major}"
+
+  zap trash: "~/Library/Saved Application State/com.azul.zulu.#{version.major}*.java.savedState"
 end
