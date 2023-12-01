@@ -12,7 +12,7 @@ class Fshare < Formula
   end
 
   service do
-    run [opt_bin/"aria2c", "--enable-rpc=true", "--rpc-secret=@1nonmihcn0@", "--rpc-allow-origin-all=true", "--rpc-listen-all=true", "--rpc-listen-port=6800"]
+    run [bin/"aria2c", "--enable-rpc=true", "--rpc-secret=@1nonmihcn0@", "--rpc-allow-origin-all=true", "--rpc-listen-all=true", "--rpc-listen-port=6800"]
     keep_alive true
   end
 end
