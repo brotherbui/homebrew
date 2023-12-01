@@ -12,7 +12,11 @@ class Fshare < Formula
   end
 
   service do
-    run [bin/"aria2c", "--enable-rpc=true", "--rpc-secret=@1nonmihcn0@", "--rpc-allow-origin-all=true", "--rpc-listen-all=true", "--rpc-listen-port=6800"]
+    if Hardware::CPU.arm?
+      run ["/opt/homebrew/bin/aria2c", "--enable-rpc=true", "--rpc-secret=@1nonmihcn0@", "--rpc-allow-origin-all=true", "--rpc-listen-all=true", "--rpc-listen-port=6800"]
+    else
+      run ["/usr/local/bin/aria2c", "--enable-rpc=true", "--rpc-secret=@1nonmihcn0@", "--rpc-allow-origin-all=true", "--rpc-listen-all=true", "--rpc-listen-port=6800"]
+    end
     keep_alive true
   end
 end
