@@ -14,11 +14,10 @@ class Fshare < Formula
     sha256 "3c7f10b7e54fc790fbf1cef30d9a696ce759b5c8a055aa0b4197d9d741fd5609"
   end
 
-  #depends_on "aria2"
+  depends_on "aria2"
 
   def install
     bin.install "./fshare"
-    bin.install "./aria2c"
   end
 
   service do
