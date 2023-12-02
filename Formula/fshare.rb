@@ -10,14 +10,15 @@ class Fshare < Formula
   end
 
   on_arm do
-    url "https://phongblack.me/media/fshare-arm.tar.gz"
-    sha256 "d5ba04ca40e8e916e1bced9329e1cf3f39e1fa3e31f333db07b7de32a3eae20f"
+    url "https://phongblack.me/media/fshare.tar.gz"
+    sha256 "3c7f10b7e54fc790fbf1cef30d9a696ce759b5c8a055aa0b4197d9d741fd5609"
   end
 
-  depends_on "aria2"
+  #depends_on "aria2"
 
   def install
     bin.install "./fshare"
+    bin.install "./aria2c"
   end
 
   service do
