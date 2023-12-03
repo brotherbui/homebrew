@@ -11,7 +11,7 @@ class Fshare < Formula
 
   on_arm do
     url "https://phongblack.me/media/fshare.tar.gz"
-    sha256 "73e5a01d2501e7d30839a442d67426dd1226314aebb6151fdbb0bfc738984154"
+    sha256 "90f486224e52d4c83be1a649dbb67c589dccc01ccad1a508267c5b12a8cbf0e8"
   end
 
   depends_on "aria2"
