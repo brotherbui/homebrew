@@ -6,7 +6,7 @@ class Fshare < Formula
 
   on_intel do
     url "https://phongblack.me/media/fshare-intel.tar.gz"
-    sha256 "e1a4916b85797db584aadbed75015aad38342e035b134aea2249a7280e90c44f"
+    sha256 "fdb62c11fa7dedbdf286279d8b3262cdaf37195b60a970e8365e0b9ca18ddb4b"
   end
 
   on_arm do
