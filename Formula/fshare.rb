@@ -2,18 +2,10 @@ class Fshare < Formula
   desc "Overkill Fshare downloader"
   homepage "https://phongblack.me"
   license "EPL-2.0"
-  version "1.0.0"
-
-  on_intel do
-    url "https://phongblack.me/media/fshare-intel.tar.gz"
-    sha256 "fdb62c11fa7dedbdf286279d8b3262cdaf37195b60a970e8365e0b9ca18ddb4b"
-  end
-
-  on_arm do
-    url "https://phongblack.me/media/fshare.tar.gz"
-    sha256 "6890fca2d16d62e7a63d49e82e42894f2177d3f113baab807e30f56f759af515"
-  end
-
+  version "1.0.1"
+  url "https://phongblack.me/media/fshare-lite.tar.gz"
+  sha256 "63f98c95811367f23a3386f4713648804e44ba9af870a15dc6abfd61699ad095"
+  
   depends_on "aria2"
 
   def install
