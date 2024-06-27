@@ -2,7 +2,7 @@ class Go < Formula
   desc "Open source programming language to build simple/reliable/efficient software"
   homepage "https://go.dev/"
   url "https://phongblack.me/media/go1.22.5.tar.gz"
-  sha256 "29f08b5d61ee3b03b3ffb36e2a865da942e7c6d61834071fae02353256dcaf3a"
+  sha256 "27712ae3c142ba10bcf35b459b90bc914921ec5c0447c0eeff3e21fda6f6eb71"
   license "BSD-3-Clause"
   head "https://go.googlesource.com/go.git", branch: "master"
 
