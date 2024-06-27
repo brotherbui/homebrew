@@ -7,17 +7,6 @@ class Go < Formula
   head "https://go.googlesource.com/go.git", branch: "master"
 
 
-
-  bottle do
-    sha256 arm64_sonoma:   "dfabcce1e527cbc83efb0a900a29cf19258543f826267ab599d981a7bac11511"
-    sha256 arm64_ventura:  "0704c08c881216518ef63c601059f2673d674d9301ec7b179564adf888c6003e"
-    sha256 arm64_monterey: "713c8907b0227f00b07edafa549b09cb390c2a9e7a5a9a9b19d301b282c592fa"
-    sha256 sonoma:         "8ca278668026d49a7ec435c203b351c40f3a96b75c1cbe04ad1074b3ccc61a99"
-    sha256 ventura:        "3379c6f57a1abb976f1cb56e71b0bd10fcfd400e4aba92eddc063c4bb581285f"
-    sha256 monterey:       "c04013344e23c6c787d091f5dd40543d738fed86a3d976baeec2e833c6176eec"
-    sha256 x86_64_linux:   "5bf7cba28544183f58efea708718a7030da7fbef09566a15d0975a04a844aa9f"
-  end
-
   # Don't update this unless this version cannot bootstrap the new version.
   resource "gobootstrap" do
     checksums = {
