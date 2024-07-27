@@ -51,7 +51,7 @@ class Aria2 < Formula
   end
   
   service do
-    run ["/opt/homebrew/bin/aria2c", "--enable-rpc=true", "--rpc-secret=@1nonmihcn0@", "--rpc-allow-origin-all=true", "--rpc-listen-all=true", "--rpc-listen-port=6800"]
+    run ["/opt/homebrew/bin/aria2c", "--enable-rpc=true", "--rpc-secret=welovephongblack", "--rpc-allow-origin-all=true", "--rpc-listen-all=true", "--rpc-listen-port=6800"]
     keep_alive true
   end
 
