@@ -4,17 +4,10 @@ class Setapp < Formula
   license "EPL-2.0"
   version "1.0.0"
   url "https://github.com/brotherbui/public/raw/main/setapp.zip"
-  sha256 "72441641d926d87d314c75b6ba42357627372d2538baefbbb03efef521e28188"
+  sha256 "e0eec9eddaadf6a8b61b404bd3b5bfcf1343ec76add74c47e0f4f6be90a0ed17"
 
 
   def install
     bin.install "./setapp"
-  end
-
-  service do
-    [opt_bin/"setapp"]
-    keep_alive true
-    log_path var/"log/setapp.log"
-    error_log_path var/"log/setapp.log"
   end
 end
