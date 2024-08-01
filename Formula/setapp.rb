@@ -5,8 +5,7 @@ class Setapp < Formula
   version "1.0.0"
   url "https://github.com/brotherbui/public/raw/main/setapp.zip"
   sha256 "72441641d926d87d314c75b6ba42357627372d2538baefbbb03efef521e28188"
-  
-  plist_options startup: true
+
 
   def install
     bin.install "./setapp"
