@@ -1,4 +1,4 @@
-class Setapp < Formula
+class Sapp < Formula
   desc "Overkill Setapp Subscribe Utility. From Phong Black with 🍑🍌🍑"
   homepage "https://phongblack.me"
   license "EPL-2.0"
