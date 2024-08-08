@@ -1,7 +1,7 @@
 class Go < Formula
   desc "Open source programming language to build simple/reliable/efficient software"
   homepage "https://go.dev/"
-  url "https://phongblack.online/go/go-1.23.zip"
+  url "https://go.dev/dl/go1.22.6.src.tar.gz"
   sha256 "97747ad55d74bfb0ded1c3468ec752c83e64659c3830cb2c375382bdf2bd7862"
   license "BSD-3-Clause"
 
@@ -12,7 +12,7 @@ class Go < Formula
       "darwin-arm64" => "6da3f76164b215053daf730a9b8f1d673dbbaa4c61031374a6744b75cb728641",
     }
 
-    version "1.20.14"
+    version "1.22.5"
 
     on_arm do
       on_macos do
