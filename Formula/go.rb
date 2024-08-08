@@ -8,8 +8,8 @@ class Go < Formula
 
 
   def install
-    bin.install Dir["*"]
-    bin.install_symlink Dir["bin/go*"]
+    libexec.install Dir["*"]
+    bin.install_symlink Dir[libexec/"bin/go*"]
 
   end
 
