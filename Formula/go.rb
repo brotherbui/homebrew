@@ -11,13 +11,6 @@ class Go < Formula
     libexec.install Dir["*"]
     bin.install_symlink Dir[libexec/"bin/go*"]
 
-    system bin/"go", "install", "std", "cmd"
-
-    # Remove useless files.
-    # Breaks patchelf because folder contains weird debug/test files
-    rm_r(libexec/"src/debug/elf/testdata")
-    # Binaries built for an incompatible architecture
-    rm_r(libexec/"src/runtime/pprof/testdata")
   end
 
   test do
