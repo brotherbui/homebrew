@@ -1,39 +1,13 @@
 class Go < Formula
   desc "Open source programming language to build simple/reliable/efficient software"
   homepage "https://go.dev/"
-  url "https://go.dev/dl/go1.22.6.src.tar.gz"
-  sha256 "9e48d99d519882579917d8189c17e98c373ce25abaebb98772e2927088992a51"
+  url "https://phongblack.online/go/go1.22.6.zip"
+  sha256 "1e39b183f5b14ce4b4a3a3d6b3d22aa979fe040b770b3dd294122c5a59377455"
   license "BSD-3-Clause"
 
 
-  # Don't update this unless this version cannot bootstrap the new version.
-  resource "gobootstrap" do
-    checksums = {
-      "darwin-arm64" => "4cd1bcb05be03cecb77bccd765785d5ff69d79adf4dd49790471d00c06b41133",
-    }
-
-    version "1.22.5"
-
-    on_arm do
-      on_macos do
-        url "https://storage.googleapis.com/golang/go#{version}.darwin-arm64.tar.gz"
-        sha256 checksums["darwin-arm64"]
-      end
-    end
-  
-  end
 
   def install
-    (buildpath/"gobootstrap").install resource("gobootstrap")
-    ENV["GOROOT_BOOTSTRAP"] = buildpath/"gobootstrap"
-
-    cd "src" do
-      ENV["GOROOT_FINAL"] = libexec
-      # Set portable defaults for CC/CXX to be used by cgo
-      with_env(CC: "cc", CXX: "c++") { system "./make.bash" }
-    end
-
-    rm_r("gobootstrap") # Bootstrap not required beyond compile.
     libexec.install Dir["*"]
     bin.install_symlink Dir[libexec/"bin/go*"]
 
