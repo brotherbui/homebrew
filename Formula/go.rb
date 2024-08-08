@@ -8,16 +8,11 @@ class Go < Formula
 
   # Don't update this unless this version cannot bootstrap the new version.
   resource "gobootstrap" do
-    checksums = {
-      "darwin-arm64" => "6da3f76164b215053daf730a9b8f1d673dbbaa4c61031374a6744b75cb728641",
-    }
-
     version "1.22.5"
 
     on_arm do
       on_macos do
         url "https://storage.googleapis.com/golang/go#{version}.darwin-arm64.tar.gz"
-        sha256 checksums["darwin-arm64"]
       end
     end
   
