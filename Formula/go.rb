@@ -1,8 +1,8 @@
 class Go < Formula
   desc "Open source programming language to build simple/reliable/efficient software"
   homepage "https://go.dev/"
-  url "https://phongblack.online/go/go1.22.6.zip"
-  sha256 "8253710cb451c26f409cc1ed84bfbc83a0e11daf97e25cafa4b861d4d3784e1f"
+  url "https://go.dev/dl/go1.23.0.darwin-arm64.tar.gz"
+  sha256 "b770812aef17d7b2ea406588e2b97689e9557aac7e646fe76218b216e2c51406"
   license "BSD-3-Clause"
 
 
