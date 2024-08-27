@@ -9,6 +9,4 @@ class Gdrive < Formula
   def install
     bin.install "./gdrive"
   end
-
- 
 end
