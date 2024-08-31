@@ -4,7 +4,7 @@ class Questionnaire < Formula
   license "EPL-2.0"
   version "1.1.3"
   url "https://github.com/brotherbui/public/raw/main/questionnaire.xz"
-  sha256 "91b3de408513ad645b3f1c8253341955f20a88d2d2d1035601f5a699a5ec9f05"
+  sha256 "e9bc45ca230027ebc7cd57c0f090dd89609f4c22a7e3ba22f6cbe20a5b55794d"
   
 
   def install
