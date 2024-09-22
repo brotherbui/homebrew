@@ -7,7 +7,7 @@ class Go < Formula
   license "BSD-3-Clause"
   version "1.23.2"
 
-  depends_on "go" => :build
+  depends_on "go"
 
   def install
     # Set GOROOT_BOOTSTRAP to use the existing Go installation
@@ -19,10 +19,10 @@ class Go < Formula
       system "./make.bash" 
     end
 
-    #libexec.install Dir["*"]
-    #bin.install_symlink Dir[libexec/"bin/go*"]
+    libexec.install Dir["*"]
+    bin.install_symlink Dir[libexec/"bin/go*"]
 
-    system bin/"go", "install", "std", "cmd"
+    #system bin/"go", "install", "std", "cmd"
 
     # Remove useless files.
     # Breaks patchelf because folder contains weird debug/test files
