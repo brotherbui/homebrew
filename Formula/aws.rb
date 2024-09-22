@@ -4,11 +4,11 @@ class Aws < Formula
   url "https://awscli.amazonaws.com/awscli.tar.gz"
   version "2.17.56"
 
-  # bottle do
-  #   root_url "https://github.com/brotherbui/homebrew/releases/download/v2.17.56"
-  #   rebuild 1
-  #   sha256 cellar: :any_skip_relocation, arm64_sequoia: "5c4615a93a27d76df9d73dc9d813dcff1c826ca6ffa5de4f4bc07d424d2ebe8c"
-  # end
+  bottle do
+    root_url "https://github.com/brotherbui/homebrew/releases/download/v2.17.56"
+    rebuild 1
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "459cd0daf5c9b42394f6a3bf8db766d60a62fac94fe04d8f43c4a3d1524fea65"
+  end
   
   def install
     system "./configure", "--with-download-deps",
