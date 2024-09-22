@@ -6,19 +6,22 @@ class Go < Formula
   sha256 "6ee44e298379d146a5e5aa6b1c5b5d5f5d0a3365eabdd70741e6e21340ec3b0d"
   license "BSD-3-Clause"
   head "https://go.googlesource.com/go.git", branch: "master"
-
   version "1.23.2"
 
+  depends_on "go" => :build
+
   def install
-    ENV["GOROOT_BOOTSTRAP"] = libexec
+    # Set GOROOT_BOOTSTRAP to use the existing Go installation
+    ENV["GOROOT_BOOTSTRAP"] = Formula["go"].opt_libexec
+
     cd "src" do
       ENV["GOROOT_FINAL"] = libexec
       # Set portable defaults for CC/CXX to be used by cgo
       system "./make.bash" 
     end
 
-    libexec.install Dir["*"]
-    bin.install_symlink Dir[libexec/"bin/go*"]
+    #libexec.install Dir["*"]
+    #bin.install_symlink Dir[libexec/"bin/go*"]
 
     system bin/"go", "install", "std", "cmd"
 
