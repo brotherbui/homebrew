@@ -2,7 +2,7 @@ class Aws < Formula
   desc "AWS Command Line Interface"
   homepage "https://aws.amazon.com/cli/"
   url "https://awscli.amazonaws.com/awscli.tar.gz"
-  
+  version "2.7.56"
 
   def install
     system "./configure", "--with-download-deps",
