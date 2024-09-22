@@ -10,6 +10,7 @@ class Go < Formula
   version "1.23.2"
 
   def install
+    ENV["GOROOT_BOOTSTRAP"] = libexec
     cd "src" do
       ENV["GOROOT_FINAL"] = libexec
       # Set portable defaults for CC/CXX to be used by cgo
