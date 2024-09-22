@@ -7,7 +7,7 @@ class Go < Formula
   license "BSD-3-Clause"
   head "https://go.googlesource.com/go.git", branch: "master"
 
-  version "1.23.1"
+  version "1.23.2"
 
   def install
     cd "src" do
