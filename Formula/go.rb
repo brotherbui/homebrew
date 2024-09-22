@@ -21,14 +21,9 @@ class Go < Formula
   end
 
   bottle do
-    sha256 arm64_sequoia:  "f1d3ecd5e98fd66f0d1a8471b63bfac4508a3b89d2a96c4b2a87243b50866fcd"
-    sha256 arm64_sonoma:   "f1d3ecd5e98fd66f0d1a8471b63bfac4508a3b89d2a96c4b2a87243b50866fcd"
-    sha256 arm64_ventura:  "f1d3ecd5e98fd66f0d1a8471b63bfac4508a3b89d2a96c4b2a87243b50866fcd"
-    sha256 arm64_monterey: "f1d3ecd5e98fd66f0d1a8471b63bfac4508a3b89d2a96c4b2a87243b50866fcd"
-    sha256 sonoma:         "bae66c6a3b31f38c026f90b1e6eba9636842d2a91de23bdafa13f1214c75d764"
-    sha256 ventura:        "bae66c6a3b31f38c026f90b1e6eba9636842d2a91de23bdafa13f1214c75d764"
-    sha256 monterey:       "bae66c6a3b31f38c026f90b1e6eba9636842d2a91de23bdafa13f1214c75d764"
-    sha256 x86_64_linux:   "25ede0356b19c3966a03ef18bb489a8c1c57f3b3a2090cc6d0980be088bc4127"
+    root_url "https://github.com/brotherbui/homebrew/releases/download/go-v1.23.1"
+    rebuild 1
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "61d13355675d9f057ede46a3db900261d474be5f198e6f7574c2412f379468e6"
   end
 
   # Don't update this unless this version cannot bootstrap the new version.
