@@ -29,10 +29,7 @@ class Go < Formula
   # Don't update this unless this version cannot bootstrap the new version.
   resource "gobootstrap" do
     checksums = {
-      "darwin-arm64" => "6da3f76164b215053daf730a9b8f1d673dbbaa4c61031374a6744b75cb728641",
-      "darwin-amd64" => "754363489e2244e72cb49b4ec6ddfd6a2c60b0700f8c4876e11befb1913b11c5",
-      "linux-arm64"  => "2096507509a98782850d1f0669786c09727053e9fe3c92b03c0d96f48700282b",
-      "linux-amd64"  => "ff445e48af27f93f66bd949ae060d97991c83e11289009d311f25426258f9c44",
+      "darwin-arm64" => "e223795ca340e285a760a6446ce57a74500b30e57469a4109961d36184d3c05a"
     }
 
     version "1.23.1"
@@ -41,20 +38,6 @@ class Go < Formula
       on_macos do
         url "https://storage.googleapis.com/golang/go#{version}.darwin-arm64.tar.gz"
         sha256 checksums["darwin-arm64"]
-      end
-      on_linux do
-        url "https://storage.googleapis.com/golang/go#{version}.linux-arm64.tar.gz"
-        sha256 checksums["linux-arm64"]
-      end
-    end
-    on_intel do
-      on_macos do
-        url "https://storage.googleapis.com/golang/go#{version}.darwin-amd64.tar.gz"
-        sha256 checksums["darwin-amd64"]
-      end
-      on_linux do
-        url "https://storage.googleapis.com/golang/go#{version}.linux-amd64.tar.gz"
-        sha256 checksums["linux-amd64"]
       end
     end
   end
