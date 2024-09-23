@@ -7,64 +7,19 @@ class Go < Formula
   license "BSD-3-Clause"
   head "https://go.googlesource.com/go.git", branch: "master"
 
-  livecheck do
-    url "https://go.dev/dl/?mode=json"
-    regex(/^go[._-]?v?(\d+(?:\.\d+)+)[._-]src\.t.+$/i)
-    strategy :json do |json, regex|
-      json.map do |release|
-        next if release["stable"] != true
-        next if release["files"].none? { |file| file["filename"].match?(regex) }
-
-        release["version"][/(\d+(?:\.\d+)+)/, 1]
-      end
-    end
-  end
-
-  # bottle do
-  #   root_url "https://github.com/brotherbui/homebrew/releases/download/go-v1.23.1"
-  #   rebuild 1
-  #   sha256 cellar: :any_skip_relocation, arm64_sequoia: "61d13355675d9f057ede46a3db900261d474be5f198e6f7574c2412f379468e6"
-  # end
-
-  # Don't update this unless this version cannot bootstrap the new version.
-  resource "gobootstrap" do
-    checksums = {
-      "darwin-arm64" => "e223795ca340e285a760a6446ce57a74500b30e57469a4109961d36184d3c05a"
-    }
-
-    version "1.23.1"
-
-    on_arm do
-      on_macos do
-        url "https://storage.googleapis.com/golang/go#{version}.darwin-arm64.tar.gz"
-        sha256 checksums["darwin-arm64"]
-      end
-    end
+  bottle do
+    root_url "https://github.com/brotherbui/homebrew/releases/download/go-v1.23.1"
+    rebuild 1
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "d6dd04d9546d25136b416f5a86176fc330492929e128b2db3409dcc9621f5a2b"
   end
 
   def install
     inreplace "go.env", /^GOTOOLCHAIN=.*$/, "GOTOOLCHAIN=local"
 
-    (buildpath/"gobootstrap").install resource("gobootstrap")
-    ENV["GOROOT_BOOTSTRAP"] = buildpath/"gobootstrap"
-
-    cd "src" do
-      ENV["GOROOT_FINAL"] = libexec
-      # Set portable defaults for CC/CXX to be used by cgo
-      with_env(CC: "cc", CXX: "c++") { system "./make.bash" }
-    end
-
-    rm_r("gobootstrap") # Bootstrap not required beyond compile.
     libexec.install Dir["*"]
     bin.install_symlink Dir[libexec/"bin/go*"]
 
     system bin/"go", "install", "std", "cmd"
-
-    # Remove useless files.
-    # Breaks patchelf because folder contains weird debug/test files
-    rm_r(libexec/"src/debug/elf/testdata")
-    # Binaries built for an incompatible architecture
-    rm_r(libexec/"src/runtime/pprof/testdata")
   end
 
   def caveats
