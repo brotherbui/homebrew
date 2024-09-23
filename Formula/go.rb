@@ -35,7 +35,7 @@ class Go < Formula
       "linux-amd64"  => "ff445e48af27f93f66bd949ae060d97991c83e11289009d311f25426258f9c44",
     }
 
-    version "1.20.14"
+    version "1.23.1"
 
     on_arm do
       on_macos do
