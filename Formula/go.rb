@@ -20,11 +20,11 @@ class Go < Formula
     end
   end
 
-  bottle do
-    root_url "https://github.com/brotherbui/homebrew/releases/download/go-v1.23.1"
-    rebuild 1
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "61d13355675d9f057ede46a3db900261d474be5f198e6f7574c2412f379468e6"
-  end
+  # bottle do
+  #   root_url "https://github.com/brotherbui/homebrew/releases/download/go-v1.23.1"
+  #   rebuild 1
+  #   sha256 cellar: :any_skip_relocation, arm64_sequoia: "61d13355675d9f057ede46a3db900261d474be5f198e6f7574c2412f379468e6"
+  # end
 
   # Don't update this unless this version cannot bootstrap the new version.
   resource "gobootstrap" do
