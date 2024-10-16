@@ -7,7 +7,7 @@ class OrdAT0201 < Formula
   version "0.20.1"
 
   def install
-    bin.install "./ord20"
+    bin.install "ord" => "ord20"
   end
 
   test do
