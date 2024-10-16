@@ -7,13 +7,13 @@ class OrdAT0201 < Formula
   version "0.20.1"
 
   def install
-    bin.install "./ord"
+    bin.install "./ord20"
   end
 
   test do
-    output = shell_output("#{bin}/ord list xx:xx 2>&1", 2)
+    output = shell_output("#{bin}/ord20 list xx:xx 2>&1", 2)
     assert_match "invalid value 'xx:xx' for '<OUTPOINT>': error parsing TXID", output
 
-    assert_match "ord #{version}", shell_output("#{bin}/ord --version")
+    assert_match "ord20 #{version}", shell_output("#{bin}/ord20 --version")
   end
 end
