@@ -15,5 +15,6 @@ class Localserver < Formula
     keep_alive true
     log_path var/"log/localserver.log"
     error_log_path var/"log/localserver.error.log"
+    run_type :immediate
   end
 end
