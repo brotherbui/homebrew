@@ -2,9 +2,9 @@ class Localreserveproxy < Formula
   desc "Overkill local reserve proxy"
   homepage "https://phongblack.me"
   license "EPL-2.0"
-  version "1.0.3"
-  url "https://github.com/brotherbui/public/raw/main/localreserveproxy-1.0.4.zip"
-  sha256 "1b77f89f9cd0bf3afd577163e7fcdb83c2a9e5e01a484d4ce4bf2755a4fd60c8"
+  version "1.0.5"
+  url "https://github.com/brotherbui/public/raw/main/localreserveproxy-1.0.5.zip"
+  sha256 "579ccbd74a7501c9f06ad094988c4b2ffc4d35e50ef14cd13a134bf3f5c5f31c"
 
   def install
     bin.install "./localreserveproxy"
