@@ -118,7 +118,7 @@ class Bitcoin < Formula
           FileUtils.chmod 0600, config_file
 
           password_file = "#{config_dir}/rpcpassword.txt"
-          File.write(password_file, <OS)
+          File.write(password_file, <<~EOS)
             Bitcoin RPC Credentials
             ----------------------
             Username: #{auth_info[:username]}
