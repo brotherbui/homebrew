@@ -47,7 +47,7 @@ class Bitcoin < Formula
     username = "mainnet"
 
     # Get the path to the rpcauth script from bitcoin
-    rpcauth_script = "#{Formula["bitcoin"].share}/bitcoin/rpcauth/rpcauth.py"
+    rpcauth_script = "#{Formula["bitcoin"].opt_share}/bitcoin/rpcauth/rpcauth.py"
 
     # Check if python3 is available
     if which("python3")
