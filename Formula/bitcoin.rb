@@ -48,6 +48,25 @@ class Bitcoin < Formula
     username = "user_#{Random.rand(100000)}"
     rpcauth_script = "#{Formula["bitcoin"].opt_share}/bitcoin/rpcauth/rpcauth.py"
 
+    # Create Bitcoin directory if it doesn't exist
+    bitcoin_dir = File.expand_path("~/Library/Application Support/Bitcoin")
+    FileUtils.mkdir_p(bitcoin_dir) unless Dir.exist?(bitcoin_dir)
+
+    # Set proper permissions
+    conf_file = File.join(bitcoin_dir, "bitcoin.conf")
+
+    # Try to create the file if it doesn't exist
+    unless File.exist?(conf_file)
+      begin
+        FileUtils.touch(conf_file)
+        FileUtils.chmod(0600, conf_file)  # Set permissions to user read/write only
+      rescue Errno::EACCES
+        opoo "Unable to create #{conf_file}"
+        opoo "You may need to create it manually"
+        return nil
+      end
+    end
+
     ohai "Debug: Checking Python installation..."
     if which("python3")
       python_cmd = "python3"
