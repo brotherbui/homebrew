@@ -43,35 +43,58 @@ class Bitcoin < Formula
   end
 
   def generate_rpc_auth
-    # Generate a random username
-    username = "mainnet"
+    begin
+      username = "user_#{Random.rand(100000)}"
+      rpcauth_script = "#{Formula["bitcoin"].opt_share}/bitcoin/rpcauth/rpcauth.py"
 
-    # Get the path to the rpcauth script from bitcoin
-    rpcauth_script = "#{Formula["bitcoin"].opt_share}/bitcoin/rpcauth/rpcauth.py"
+      ohai "Debug: Checking Python installation..."
+      if which("python3")
+        python_cmd = "python3"
+        ohai "Debug: Using python3"
+      elsif which("python")
+        python_cmd = "python"
+        ohai "Debug: Using python"
+      else
+        raise "Python is required but not found"
+      end
 
-    # Check if python3 is available
-    if which("python3")
-      python_cmd = "python3"
-    elsif which("python")
-      python_cmd = "python"
-    else
-      raise "Python is required but not found"
+      ohai "Debug: RPC auth script path: #{rpcauth_script}"
+      unless File.exist?(rpcauth_script)
+        raise "rpcauth script not found at #{rpcauth_script}"
+      end
+      ohai "Debug: RPC auth script exists"
+
+      # Execute the script and capture both stdout and stderr
+      stdout, stderr, status = Open3.capture3(python_cmd, rpcauth_script, username)
+
+      unless status.success?
+        ohai "Debug: Script execution failed"
+        ohai "Debug: STDOUT: #{stdout}"
+        ohai "Debug: STDERR: #{stderr}"
+        raise "rpcauth script execution failed"
+      end
+
+      ohai "Debug: Script output: #{stdout}"
+
+      rpcauth_line = stdout.lines.find { |line| line.start_with?("rpcauth=") }&.strip
+      password = stdout.lines.find { |line| line.include?("Password:") }&.split(":")&.last&.strip
+
+      if rpcauth_line.nil? || password.nil?
+        ohai "Debug: Failed to parse script output"
+        raise "Failed to parse rpcauth script output"
+      end
+
+      ohai "Debug: Successfully generated RPC auth"
+      {
+        rpcauth: rpcauth_line,
+        password: password,
+        username: username
+      }
+    rescue StandardError => e
+      ohai "Debug: Error in generate_rpc_auth: #{e.message}"
+      ohai "Debug: Backtrace: #{e.backtrace.join("\n")}"
+      nil
     end
-
-    # Run rpcauth script and capture output
-    rpc_auth = Utils.popen_read(python_cmd, rpcauth_script, username)
-
-    # Parse the output to get rpcauth line and password
-    rpcauth_line = rpc_auth.lines.find { |line| line.start_with?("rpcauth=") }&.strip
-    password = rpc_auth.lines.find { |line| line.include?("Password:") }&.split(":")&.last&.strip
-
-    return nil unless rpcauth_line && password
-
-    {
-      rpcauth: rpcauth_line,
-      password: password,
-      username: username
-    }
   end
 
   def write_config(auth_info)
@@ -106,7 +129,9 @@ class Bitcoin < Formula
 
   def post_install
     begin
+      ohai "Debug: Starting post_install"
       mkdir_p config_dir unless Dir.exist?(config_dir)
+      ohai "Debug: Config directory: #{config_dir}"
 
       unless File.exist?(config_file)
         ohai "Generating RPC authentication credentials..."
@@ -140,7 +165,7 @@ class Bitcoin < Formula
   def caveats
     return unless File.exist?(config_file)
 
-    <<~EOS
+    <EOS
       Configuration file created at:
       #{config_file}
 
