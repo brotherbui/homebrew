@@ -65,17 +65,14 @@ class Bitcoin < Formula
     ohai "Debug: RPC auth script exists"
 
     # Execute the script with just the username
-    stdout, stderr, status = Open3.capture3(python_cmd, rpcauth_script, username)
+    output = `#{python_cmd} #{rpcauth_script} #{username}`
 
-    ohai "Debug: Script output: #{stdout}"
+    ohai "Debug: Script output: #{output}"
 
-    # Parse the rpcauth line and password from output
-    rpcauth_line = stdout.lines.find { |line| line.include?("rpcauth=") }&.strip
-    password = stdout.lines.find { |line| line.start_with?("Your password:") }&.split(":")&.last&.strip
-
-    if rpcauth_line.nil? || password.nil?
-      raise "Failed to parse script output"
-    end
+    # Get the lines we need
+    lines = output.split("\n")
+    rpcauth_line = lines[1]  # The rpcauth line should be the second line
+    password = lines[3]      # The password should be the fourth line
 
     {
       rpcauth: rpcauth_line,
