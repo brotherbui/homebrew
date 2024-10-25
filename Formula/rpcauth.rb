@@ -1,4 +1,4 @@
-class Rocauth < Formula
+class Rpcauth < Formula
   desc "Bitcoin RPC auth generation. From Phong Black with 🍑🍌🍑 "
   homepage "https://phongblack.me/"
   license "CC0-1.0"
