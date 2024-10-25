@@ -129,7 +129,7 @@ class Bitcoin < Formula
   def caveats
     return unless File.exist?(config_file)
 
-    <
+    <<~EOS
       Configuration file created at:
       #{config_file}
 
