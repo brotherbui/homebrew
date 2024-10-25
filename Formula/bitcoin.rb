@@ -47,8 +47,20 @@ class Bitcoin < Formula
     # Generate a random username
     username = "mainnet"
 
-    # Run rpcauth command and capture output
-    rpc_auth = Utils.popen_read("rpcauth", username)
+    # Get the path to the rpcauth script from bitcoin-core
+    rpcauth_script = "#{Formula["bitcoin-core"].share}/rpcauth/rpcauth.py"
+
+    # Check if python3 is available
+    if which("python3")
+      python_cmd = "python3"
+    elsif which("python")
+      python_cmd = "python"
+    else
+      raise "Python is required but not found"
+    end
+
+    # Run rpcauth script and capture output
+    rpc_auth = Utils.popen_read(python_cmd, rpcauth_script, username)
 
     # Parse the output to get rpcauth line and password
     rpcauth_line = rpc_auth.lines.find { |line| line.start_with?("rpcauth=") }&.strip
@@ -95,19 +107,18 @@ class Bitcoin < Formula
 
   def post_install
     begin
-      # Create config directory if it doesn't exist
       mkdir_p config_dir unless Dir.exist?(config_dir)
 
       unless File.exist?(config_file)
-        # Generate RPC authentication
+        ohai "Generating RPC authentication credentials..."
         auth_info = generate_rpc_auth
         if auth_info
+          ohai "Creating configuration file..."
           write_config(auth_info)
           FileUtils.chmod 0600, config_file
 
-          # Save password to a separate file for user reference
           password_file = "#{config_dir}/rpcpassword.txt"
-          File.write(password_file, <<~EOS)
+          File.write(password_file, <OS)
             Bitcoin RPC Credentials
             ----------------------
             Username: #{auth_info[:username]}
@@ -116,6 +127,7 @@ class Bitcoin < Formula
             This file should be kept secure and deleted after noting down the credentials.
           EOS
           FileUtils.chmod 0600, password_file
+          ohai "Configuration completed successfully"
         else
           raise "Failed to generate RPC authentication"
         end
@@ -144,6 +156,7 @@ class Bitcoin < Formula
   end
 
   test do
+    assert_predicate config_file, "exist?"
     system bin/"test_bitcoin"
 
     # Test that we're using the right version of `berkeley-db`.
