@@ -1,3 +1,4 @@
+require "fileutils"
 class Bitcoin < Formula
   desc "Decentralized, peer to peer payment network"
   homepage "https://bitcoincore.org/"
