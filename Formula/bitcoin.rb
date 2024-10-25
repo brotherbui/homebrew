@@ -43,59 +43,66 @@ class Bitcoin < Formula
   end
 
   def generate_rpc_auth
-    begin
-      username = "user_#{Random.rand(100000)}"
-      rpcauth_script = "#{Formula["bitcoin"].opt_share}/bitcoin/rpcauth/rpcauth.py"
+  begin
+    username = "user_#{Random.rand(100000)}"
+    rpcauth_script = "#{Formula["bitcoin"].opt_share}/bitcoin/rpcauth/rpcauth.py"
 
-      ohai "Debug: Checking Python installation..."
-      if which("python3")
-        python_cmd = "python3"
-        ohai "Debug: Using python3"
-      elsif which("python")
-        python_cmd = "python"
-        ohai "Debug: Using python"
-      else
-        raise "Python is required but not found"
-      end
-
-      ohai "Debug: RPC auth script path: #{rpcauth_script}"
-      unless File.exist?(rpcauth_script)
-        raise "rpcauth script not found at #{rpcauth_script}"
-      end
-      ohai "Debug: RPC auth script exists"
-
-      # Execute the script and capture both stdout and stderr
-      stdout, stderr, status = Open3.capture3(python_cmd, rpcauth_script, username)
-
-      unless status.success?
-        ohai "Debug: Script execution failed"
-        ohai "Debug: STDOUT: #{stdout}"
-        ohai "Debug: STDERR: #{stderr}"
-        raise "rpcauth script execution failed"
-      end
-
-      ohai "Debug: Script output: #{stdout}"
-
-      rpcauth_line = stdout.lines.find { |line| line.start_with?("rpcauth=") }&.strip
-      password = stdout.lines.find { |line| line.include?("Password:") }&.split(":")&.last&.strip
-
-      if rpcauth_line.nil? || password.nil?
-        ohai "Debug: Failed to parse script output"
-        raise "Failed to parse rpcauth script output"
-      end
-
-      ohai "Debug: Successfully generated RPC auth"
-      {
-        rpcauth: rpcauth_line,
-        password: password,
-        username: username
-      }
-    rescue StandardError => e
-      ohai "Debug: Error in generate_rpc_auth: #{e.message}"
-      ohai "Debug: Backtrace: #{e.backtrace.join("\n")}"
-      nil
+    ohai "Debug: Checking Python installation..."
+    if which("python3")
+      python_cmd = "python3"
+      ohai "Debug: Using python3"
+    elsif which("python")
+      python_cmd = "python"
+      ohai "Debug: Using python"
+    else
+      raise "Python is required but not found"
     end
+
+    ohai "Debug: RPC auth script path: #{rpcauth_script}"
+    unless File.exist?(rpcauth_script)
+      raise "rpcauth script not found at #{rpcauth_script}"
+    end
+    ohai "Debug: RPC auth script exists"
+
+    # Execute the script and capture output
+    stdout, stderr, status = Open3.capture3(python_cmd, rpcauth_script, username)
+
+    unless status.success?
+      ohai "Debug: Script execution failed"
+      ohai "Debug: STDOUT: #{stdout}"
+      ohai "Debug: STDERR: #{stderr}"
+      raise "rpcauth script execution failed"
+    end
+
+    ohai "Debug: Script output: #{stdout}"
+
+    # New parsing logic
+    rpcauth_line = stdout.lines.find { |line| line.include?("rpcauth=") }&.split("rpcauth=")&.last&.strip
+
+    if rpcauth_line.nil?
+      ohai "Debug: Failed to parse rpcauth line"
+      raise "Failed to parse rpcauth line from script output"
+    end
+
+    # Split the rpcauth line to get username and salt/hash
+    username, hash = rpcauth_line.split(":")
+
+    # Generate a random password (since the script doesn't provide one)
+    password = SecureRandom.hex(16)
+
+    ohai "Debug: Successfully generated RPC auth"
+    {
+      rpcauth: "rpcauth=#{rpcauth_line}",
+      password: password,
+      username: username
+    }
+  rescue StandardError => e
+    ohai "Debug: Error in generate_rpc_auth: #{e.message}"
+    ohai "Debug: Backtrace: #{e.backtrace.join("\n")}"
+    nil
   end
+end
+
 
   def write_config(auth_info)
     File.open(config_file, "w") do |f|
