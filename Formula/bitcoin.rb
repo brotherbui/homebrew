@@ -16,7 +16,6 @@ class Bitcoin < Formula
     regex(/latest version.*?v?(\d+(?:\.\d+)+)/i)
   end
 
-  depends_on "rpcauth"
 
   bottle do
     sha256 cellar: :any,                 arm64_sequoia: "9827fe39470644c9e18c2e29a9cc50517d755ab23600dfc15fc73a4c436090df"
@@ -47,8 +46,8 @@ class Bitcoin < Formula
     # Generate a random username
     username = "mainnet"
 
-    # Get the path to the rpcauth script from bitcoin-core
-    rpcauth_script = "#{Formula["bitcoin-core"].share}/rpcauth/rpcauth.py"
+    # Get the path to the rpcauth script from bitcoin
+    rpcauth_script = "#{Formula["bitcoin"].share}/rpcauth/rpcauth.py"
 
     # Check if python3 is available
     if which("python3")
