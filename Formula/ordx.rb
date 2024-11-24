@@ -17,10 +17,10 @@ class Ordx < Formula
 
   on_linux do
     if Hardware::CPU.intel?
-      url "https://github.com/brotherbui/public/releases/download/ord/ordx-0.21.2-lilux.tgz"
+      url "https://github.com/brotherbui/public/releases/download/ord/ordx-0.21.2-linux.tgz"
       sha256 "9932a240d0e242252615f531cfc76aa7ae1cf892454ebfa1ed32387926f0ad4b"
     elsif Hardware::CPU.arm?
-      url "https://github.com/brotherbui/public/releases/download/ord/ordx-0.21.2-lilux.tgz"
+      url "https://github.com/brotherbui/public/releases/download/ord/ordx-0.21.2-linux.tgz"
       sha256 "9932a240d0e242252615f531cfc76aa7ae1cf892454ebfa1ed32387926f0ad4b"
     end
   end
