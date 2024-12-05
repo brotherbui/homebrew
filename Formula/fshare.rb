@@ -4,7 +4,7 @@ class Fshare < Formula
   license "EPL-2.0"
   version "1.0.6"
   url "https://github.com/brotherbui/public/releases/download/fshare/fshare.tgz"
-  sha256 "a234835d7c641d5a928e8666506c37faa5b611362c51db0c64c71ccfa315c191"
+  sha256 "6fb98ebfb4fe24943416fb78779be5d8b5bc41690a5f667afa3472e080eae25e"
 
   depends_on "aria2"
 
