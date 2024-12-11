@@ -6,22 +6,22 @@ class Ordx < Formula
 
   on_macos do
     on_arm do
-      url "https://github.com/brotherbui/public/releases/download/ord/ord.tgz"
-      sha256 "3305fe98b3aaa8c0072d1e9b4a01c3097c147217332341994ef3b0bbf15ca12a"
+      url "https://github.com/brotherbui/public/releases/download/ord/ordx-0.22.0.tgz"
+      sha256 "74141f8a7ed00be8f0834bfb51b81a1b1714c3e2d8d702126bfac90dad86f3e0"
     end
     on_intel do
-      url "https://github.com/brotherbui/public/releases/download/ord/ord.tgz"
-      sha256 "3305fe98b3aaa8c0072d1e9b4a01c3097c147217332341994ef3b0bbf15ca12a"
+      url "https://github.com/brotherbui/public/releases/download/ord/ordx-0.22.0.tgz"
+      sha256 "74141f8a7ed00be8f0834bfb51b81a1b1714c3e2d8d702126bfac90dad86f3e0"
     end
   end
 
   on_linux do
     if Hardware::CPU.intel?
-      url "https://github.com/brotherbui/public/releases/download/ord/ord-linux.tgz"
-      sha256 "28be1a3481208fab02891dfa4b9ba263e9828a4432f2173286b7e6b443d1f82e"
+      url "https://github.com/brotherbui/public/releases/download/ord/ordx-0.22.0-linux.tgz"
+      sha256 "15ba63746fe466e2da9f322cca3cf528bd38e7e13de630c08d6cc5b203168167"
     elsif Hardware::CPU.arm?
-      url "https://github.com/brotherbui/public/releases/download/ord/ord-linux.tgz"
-      sha256 "28be1a3481208fab02891dfa4b9ba263e9828a4432f2173286b7e6b443d1f82e"
+      url "https://github.com/brotherbui/public/releases/download/ord/ordx-0.22.0-linux.tgz"
+      sha256 "15ba63746fe466e2da9f322cca3cf528bd38e7e13de630c08d6cc5b203168167"
     end
   end
 
