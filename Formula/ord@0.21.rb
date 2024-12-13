@@ -4,7 +4,7 @@ class OrdAT021 < Formula
   url "https://github.com/ordinals/ord/archive/refs/tags/0.21.3.tar.gz"
   sha256 "c0411d106057d622f6a7cc9cc6fc7bbfec82a081eb9bbd322f99074ff4859cf0"
   license "CC0-1.0"
-  version "0.21.3
+  version "0.21.3"
   head "https://github.com/ordinals/ord.git", branch: "master"
 
   bottle do
