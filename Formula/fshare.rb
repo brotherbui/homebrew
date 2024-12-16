@@ -2,17 +2,17 @@ class Fshare < Formula
   desc "Overkill Fshare downloader"
   homepage "https://phongblack.me"
   license "EPL-2.0"
-  version "1.0.8"
+  version "1.0.9"
 
 
   on_macos do
     on_arm do
         url "https://github.com/brotherbui/public/releases/download/fshare/fshare.tgz"
-        sha256 "c4f39da7dde1485a81dcec6032aa623c34d08c0c136d5422e93c674421e9cfa4"
+        sha256 "c531a257939b8cf9c43f9d699ef6258af194a402fb9154d4ecc1eaea5ff69e8b"
     end
     on_intel do
         url "https://github.com/brotherbui/public/releases/download/fshare/fshare-intel.tgz"
-        sha256 "df5d2b9f8c61d56b7478a377828bea6adc8d808d6300dbab5bb61e1f476c7cfd"
+        sha256 "c0fb830ebfbe459ac1b39763ff4c5d3dba3976f0720732ee6ae5ff5bec208206"
     end
   end
 
