@@ -7,21 +7,21 @@ class Ordx < Formula
   on_macos do
     on_arm do
       url "https://github.com/brotherbui/public/releases/download/ord/ordx-0.22.0.txz"
-      sha256 "fe29a7648431a03f2fe056b80ee62e3acac15a953c6b8bfd52da0acc59431139"
+      sha256 "bae03108ca154035ba8a26e14c9c0e4ba0e7f1d53cc65f109d16033bd596bc00"
     end
     on_intel do
       url "https://github.com/brotherbui/public/releases/download/ord/ordx-0.22.0.txz"
-      sha256 "fe29a7648431a03f2fe056b80ee62e3acac15a953c6b8bfd52da0acc59431139"
+      sha256 "bae03108ca154035ba8a26e14c9c0e4ba0e7f1d53cc65f109d16033bd596bc00"
     end
   end
 
   on_linux do
     if Hardware::CPU.intel?
       url "https://github.com/brotherbui/public/releases/download/ord/ordx-0.22.0-linux.txz"
-      sha256 "a6e7b74838d5c3c209259ff5e8b478f1ef1fb4007731a4d88e3fb917da82f2b8"
+      sha256 "25d0baab0c3043ca249fc2b87eb79f223ae2fdf87fb892eeaae8bb0eeba812d5"
     elsif Hardware::CPU.arm?
       url "https://github.com/brotherbui/public/releases/download/ord/ordx-0.22.0-linux.txz"
-      sha256 "a6e7b74838d5c3c209259ff5e8b478f1ef1fb4007731a4d88e3fb917da82f2b8"
+      sha256 "25d0baab0c3043ca249fc2b87eb79f223ae2fdf87fb892eeaae8bb0eeba812d5"
     end
   end
 
