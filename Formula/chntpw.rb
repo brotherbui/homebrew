@@ -5,12 +5,12 @@ class Chntpw < Formula
   sha256 "e915f5addc2673317285c6f022c94da7fdee415d9800cd38540a13706706786b"
   head "https://github.com/sidneys/chntpw.git"
 
-  depends_on "brotherbui/homebrew/openssl@1.1"
+  depends_on "brotherbui/homebrew/openssl@1.0"
 
   def install
     if Hardware::CPU.arm?
       # Homebrew on M1 appears to install here instead of /usr/local/opt
-      system "make", "OSSLPATH=/opt/homebrew/opt/openssl@1.1"
+      system "make", "OSSLPATH=/opt/homebrew/opt/openssl@1.0"
     else
       system "make"
     end
