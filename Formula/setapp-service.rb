@@ -14,7 +14,7 @@ class SetappService < Formula
   end
 
   service do
-    run [opt_bin/"setapp-service"]
+    run [bin/"setapp-service"]
     keep_alive false
     interval 3600 # Run every hour
     log_path var/"log/setapp-service/service.log"
