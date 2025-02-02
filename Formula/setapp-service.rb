@@ -26,7 +26,7 @@ class SetappService < Formula
     # Configuration
     keep_alive false
     run_type :interval
-    interval 60
+    interval 3600
     working_dir HOMEBREW_PREFIX
     environment_variables HOMEBREW_PREFIX: HOMEBREW_PREFIX
 
