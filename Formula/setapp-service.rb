@@ -2,7 +2,7 @@ class SetappService < Formula
   desc "Overkill Setapp Subscribe Utility. From Phong Black with 🍑🍌🍑"
   homepage "https://phongblack.me"
   version "1.0.1"
-  url "https://github.com/brotherbui/public/releases/download/setapp-service/setapp-service.txz"
+  url "https://github.com/brotherbui/public/releases/download/setapp-service/setapp-service-1.0.1.txz"
   sha256 "5bc42aa7d084b6d3a9f3ce1c927d80f67026f08009109e5000d0f4b8f173a28a"
 
   def install
