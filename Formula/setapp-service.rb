@@ -21,20 +21,18 @@ class SetappService < Formula
   end
 
   service do
-    run [opt_bin/"setapp-service"]  # Use opt_bin instead of bin (critical fix)
+    run [opt_bin/"setapp-service"]
 
     # Configuration
     keep_alive false
-    interval 60  # Translates to StartInterval=3600 in plist
-    working_dir var/"setapp-service"  # Safer than HOMEBREW_PREFIX
+    run_type :interval
+    interval 60
+    working_dir var/"setapp-service"
 
     # Log paths
     log_path var/"log/setapp-service/service.log"
     error_log_path var/"log/setapp-service/error.log"
 
-    # Environment
-    environment_variables PATH: "#{HOMEBREW_PREFIX}/bin:/usr/bin:/bin:/usr/sbin:/sbin",
-                          HOMEBREW_PREFIX: HOMEBREW_PREFIX.to_s
 
     # Uncomment for system-wide root execution (if needed)
     # require_root: true
