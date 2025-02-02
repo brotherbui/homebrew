@@ -25,7 +25,7 @@ class SetappService < Formula
 
     # Configuration
     keep_alive false
-    interval 3600  # Translates to StartInterval=3600 in plist
+    interval 60  # Translates to StartInterval=3600 in plist
     working_dir var/"setapp-service"  # Safer than HOMEBREW_PREFIX
 
     # Log paths
