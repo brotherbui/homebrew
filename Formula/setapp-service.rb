@@ -10,14 +10,14 @@ class SetappService < Formula
     bin.install "setapp-service"
 
     # Set executable permissions explicitly
-    chmod 0755, bin/"setapp-service"
+    # chmod 0755, bin/"setapp-service"
 
     # Create directories with proper ownership
     (var/"log/setapp-service").mkpath
     (var/"setapp-service").mkpath
 
     # Ensure write permissions for logs
-    chmod 0777, var/"log/setapp-service"
+    # chmod 0777, var/"log/setapp-service"
   end
 
   service do
@@ -27,7 +27,8 @@ class SetappService < Formula
     keep_alive false
     run_type :interval
     interval 60
-    working_dir var/"setapp-service"
+    working_dir HOMEBREW_PREFIX
+    environment_variables HOMEBREW_PREFIX: HOMEBREW_PREFIX
 
     # Log paths
     log_path var/"log/setapp-service/service.log"
