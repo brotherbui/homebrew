@@ -16,7 +16,7 @@ class Fshare < Formula
     end
   end
 
-  depends_on "aria2"
+  depends_on "aria2x"
 
   def install
     bin.install "./fshare"
