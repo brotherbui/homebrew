@@ -3,7 +3,7 @@ class SetappService < Formula
   homepage "https://phongblack.me"
   version "1.0.2"
   url "https://github.com/brotherbui/public/releases/download/setapp-service/setapp-service-1.0.2.txz"
-  sha256 "1ad429e4df05540f7234a3e87f98f004473588de61a8a8b70070aa8da4532529"
+  sha256 "06b7275c44e679f6eb20c7568134d8551ee171549fbfff46339b3a6fd6bf6877"
 
   def install
     # Install binary to Homebrew's bin directory
