@@ -1,9 +1,9 @@
 class SetappService < Formula
   desc "Overkill Setapp Subscribe Utility. From Phong Black with 🍑🍌🍑"
   homepage "https://phongblack.me"
-  version "1.0.1"
-  url "https://github.com/brotherbui/public/releases/download/setapp-service/setapp-service-1.0.1.txz"
-  sha256 "5bc42aa7d084b6d3a9f3ce1c927d80f67026f08009109e5000d0f4b8f173a28a"
+  version "1.0.2"
+  url "https://github.com/brotherbui/public/releases/download/setapp-service/setapp-service-1.0.2.txz"
+  sha256 "1ad429e4df05540f7234a3e87f98f004473588de61a8a8b70070aa8da4532529"
 
   def install
     # Install binary to Homebrew's bin directory
