@@ -46,7 +46,7 @@ class Aria2c < Formula
     bash_completion.install "doc/bash_completion/aria2c"
   end
   service do
-    run [opt_bin/"aria2c", "--disk-cache=128M", "--enable-rpc=true", "--rpc-secret=welovephongblack", "--rpc-allow-origin-all=true", "--rpc-listen-all=true", "--rpc-listen-port=6800"]
+    run [opt_bin/"aria2c", "--disk-cache=64M", "--enable-rpc=true", "--rpc-secret=welovephongblack", "--rpc-allow-origin-all=true", "--rpc-listen-all=true", "--rpc-listen-port=6800"]
     keep_alive true
   end
   test do
