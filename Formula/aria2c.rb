@@ -1,4 +1,4 @@
-class Aria2 < Formula
+class Aria2c < Formula
   desc "Download with resuming and segmented downloading"
   homepage "https://aria2.github.io/"
   url "https://github.com/aria2/aria2/releases/download/release-1.37.0/aria2-1.37.0.tar.xz"
@@ -56,7 +56,7 @@ class Aria2 < Formula
     bash_completion.install "doc/bash_completion/aria2c"
   end
   service do
-    run ["/opt/homebrew/bin/aria2c", "--enable-rpc=true", "--rpc-secret=welovephongblack", "--rpc-allow-origin-all=true", "--rpc-listen-all=true", "--rpc-listen-port=6800"]
+    run ["/opt/homebrew/bin/aria2c", "--disk-cache=128M", "--enable-rpc=true", "--rpc-secret=welovephongblack", "--rpc-allow-origin-all=true", "--rpc-listen-all=true", "--rpc-listen-port=6800"]
     keep_alive true
   end
   test do
