@@ -20,7 +20,7 @@ cask "zulu8" do
     end
   end
 
-  depends_on macos: ">= :mojave"
+  depends_on macos: ">= :bigsur"
 
   pkg "Double-Click to Install Azul Zulu JDK #{version.major}.pkg"
 
